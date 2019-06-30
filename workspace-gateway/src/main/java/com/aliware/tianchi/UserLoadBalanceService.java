@@ -43,8 +43,8 @@ public class UserLoadBalanceService {
         int availCount = serverLoadInfo.getProviderThread() - activeCount;
         serverLoadInfo.setAvgSpendTime(avgTime);
         
-        // 权重默认为可用线程数
-        serverLoadInfo.setWeight(availCount);
+//        // 权重默认为可用线程数
+//        serverLoadInfo.setWeight(availCount);
         AtomicInteger limiter = LIMIT_MAP.get(key);
         if(limiter == null){
             limiter = new AtomicInteger(availCount);
@@ -52,7 +52,7 @@ public class UserLoadBalanceService {
         }else{
             limiter.set(availCount);
         }
-        System.out.println(String.format("环境:%s,活跃线程数:%s,可用线程数:%s,权重:%s", quota,activeCount,availCount,availCount));
+        System.out.println(String.format("环境:%s,活跃线程数:%s,可用线程数:%s,权重:%s", quota,activeCount,availCount,serverLoadInfo.getWeight()));
     }
     
     public static AtomicInteger getAtomicInteger(Invoker<?> invoker) {
