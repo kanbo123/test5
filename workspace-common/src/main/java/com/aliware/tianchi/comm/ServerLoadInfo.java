@@ -36,6 +36,7 @@ public class ServerLoadInfo {
         
         this.quota = quota;
         this.providerThread = providerThread;
+        this.weight = providerThread;
 //            if("small".equals(quota)){
 //                this.weight = 2;
 //                this.permit=200;
