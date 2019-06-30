@@ -35,21 +35,17 @@ public class ServerLoadInfo {
     public ServerLoadInfo(String quota,int providerThread){
         
         this.quota = quota;
-        this.providerThread = providerThread;
+        this.providerThread = providerThread-50;
         this.weight = providerThread;
-//            if("small".equals(quota)){
-//                this.weight = 2;
-//                this.permit=200;
-//            }else if("medium".equals(quota)){
-//                this.weight = 5;
-//                this.permit=450;
-//            }else if("large".equals(quota)){
-//                this.weight = 8;
-//                this.permit=650;
-//            }else{
-//                this.weight = 1;
-//                this.permit=200;
-//            }
+            if("small".equals(quota)){
+                this.weight = 2;
+            }else if("medium".equals(quota)){
+                this.weight = 5;
+            }else if("large".equals(quota)){
+                this.weight = 8;
+            }else{
+                this.weight = 1;
+            }
     }
     
     public String getQuota() {
