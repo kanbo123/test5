@@ -32,7 +32,6 @@ public class UserLoadBalance implements LoadBalance{
         // 总权重
         int totalWeight = 0;
         List<Integer> hasPermitArr = new ArrayList<>();
-        List<Integer> weightArr = new ArrayList<>(); 
         // 首先获取invoker对应的服务端耗时最大的索引
         //String loadInfo = "";
         for(int index=0;index<size;index++){
@@ -45,13 +44,13 @@ public class UserLoadBalance implements LoadBalance{
                 if(permits > 0 ){
                     //loadInfo  = loadInfo+index+","+permits+":";
                     hasPermitArr.add(index);
-                    weightArr.add(permits);
-                    totalWeight = totalWeight+permits;
+                    totalWeight = totalWeight+serverLoadInfo.getWeight();
                 }
                 
             }
             
         }
+        //System.out.println(System.currentTimeMillis()+"-"+loadInfo);
         // 服务都被打满了,随机选一个
         if(hasPermitArr.size() == 0){
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -64,7 +63,8 @@ public class UserLoadBalance implements LoadBalance{
         
         for(int i=0;i<hasPermitArr.size();i++){
             int index = hasPermitArr.get(i);
-            int currentWeight = weightArr.get(index);
+            ServerLoadInfo serverLoadInfo = UserLoadBalanceService.getServerLoadInfo(invokers.get(index));
+            int currentWeight = serverLoadInfo.getWeight();
             offsetWeight  = offsetWeight - currentWeight;
             if (offsetWeight < 0) {
                 return invokers.get(index);
