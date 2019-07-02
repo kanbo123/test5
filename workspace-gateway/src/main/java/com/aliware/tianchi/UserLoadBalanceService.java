@@ -52,7 +52,7 @@ public class UserLoadBalanceService {
         }else{
             limiter.set(availCount);
         }
-        System.out.println(String.format("环境:%s,活跃线程数:%s,可用线程数:%s,权重:%s", quota,activeCount,availCount,serverLoadInfo.getWeight()));
+        //System.out.println(String.format("环境:%s,活跃线程数:%s,可用线程数:%s,权重:%s", quota,activeCount,availCount,serverLoadInfo.getWeight()));
     }
     
     public static AtomicInteger getAtomicInteger(Invoker<?> invoker) {
