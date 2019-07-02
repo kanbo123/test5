@@ -52,9 +52,9 @@ public class CallbackServiceImpl implements CallbackService {
                 // 环境,线程总数,活跃线程数,平均耗时
                 String notifyStr = getNotifyStr();
                 
-                System.out.println(String.format("统计数据【时间:%s,%s】", 
-                  nowStr,
-                  notifyStr));
+                //System.out.println(String.format("统计数据【时间:%s,%s】", 
+                  //nowStr,
+                  //notifyStr));
                 
                 if (!listeners.isEmpty()) {
                     for (Map.Entry<String, CallbackListener> entry : listeners.entrySet()) {
